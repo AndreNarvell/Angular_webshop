@@ -1,0 +1,17 @@
+<h1>Here are all the movies</h1>
+
+<div class="card-columns">
+  <div class="card" *ngFor="let movie of products" id="{{ movie.id }}">
+    <img class="card-img-top" src="{{ movie.imageUrl }}" />
+    <div class="card-body">
+      <h2 class="card-title">{{ movie.name }}</h2>
+      <h4>{{ movie.year }}</h4>
+      <p class="card-text">{{ movie.description }}</p>
+
+      <h3>
+        {{ movie.price }} SEK
+        <button (click)="buyMovie(movie)">BUY</button>
+      </h3>
+    </div>
+  </div>
+</div>

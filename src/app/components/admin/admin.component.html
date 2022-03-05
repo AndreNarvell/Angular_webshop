@@ -1,0 +1,16 @@
+<div *ngIf="adminOrders.length === 0">
+  <section>
+    <h1>No orders to show, sorry admin...</h1>
+  </section>
+</div>
+
+<div *ngIf="adminOrders.length >= 1">
+  <section *ngFor="let orders of adminOrders.reverse()" id="{{ orders.id }}">
+    <p>Order id: {{ orders.id }}</p>
+    <p>Order made by: {{ orders.createdBy | titlecase }}</p>
+    <p>Order date: {{ orders.created | date: "dd/MM/yyyy" }}</p>
+    <p>Order total price: {{ orders.totalPrice + "SEK" }}</p>
+    <p>Order payment method: {{ orders.paymentMethod }}</p>
+    <button (click)="deleteOrder(orders.id)">Delete order</button>
+  </section>
+</div>

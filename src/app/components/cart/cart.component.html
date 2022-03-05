@@ -1,0 +1,22 @@
+<div *ngIf="cartProducts.length === 0">
+  <p>NO ITEMS</p>
+</div>
+
+<div *ngIf="cartProducts.length >= 1">
+  <p *ngFor="let cartMovie of cartProducts; let i = index">
+    {{ cartMovie.name }}
+    <button (click)="deleteMovie(i)">Remove</button>
+  </p>
+
+  <h2>Total money : {{ totalAmount }}</h2>
+
+  <div>
+    <form [formGroup]="userForm" (ngSubmit)="completePurchase()">
+      <p>Customer info</p>
+      <input type="text" placeholder="firstname" formControlName="firstname" />
+
+      <button type="submit" [disabled]="!userForm.valid">Purchase</button>
+    </form>
+  </div>
+  <button (click)="emptyCart()">Empty cart</button>
+</div>

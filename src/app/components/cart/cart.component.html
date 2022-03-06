@@ -5,7 +5,12 @@
 <div *ngIf="cartProducts.length >= 1">
   <p *ngFor="let cartMovie of cartProducts; let i = index">
     {{ cartMovie.name }}
-    <button (click)="deleteMovie(i)">Remove</button>
+    <button
+      (click)="buySnackBar('Item was deleted. ', 'Dismiss')"
+      (click)="deleteMovie(i)"
+    >
+      Remove
+    </button>
   </p>
 
   <h2>Total money : {{ totalAmount }}</h2>

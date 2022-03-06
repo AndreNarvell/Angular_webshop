@@ -1,17 +1,29 @@
-<h1>Here are all the movies</h1>
+<section class="text-center">
+  <h1 class="mt-2">Here are all the movies</h1>
+  <div class="card-columns d-flex flex-wrap mx-auto justify-content-center">
+    <div
+      class="card mt-3 mx-3 text-white bg-primary shadow"
+      style="width: 23rem"
+      *ngFor="let movie of products"
+      id="{{ movie.id }}"
+    >
+      <img class="card-img-top" src="{{ movie.imageUrl }}" />
+      <div class="card-body">
+        <h4 class="card-title">{{ movie.name }}</h4>
+        <h5 class="text-muted">{{ movie.year }}</h5>
+        <p class="card-text">{{ movie.description }}</p>
 
-<div class="card-columns">
-  <div class="card" *ngFor="let movie of products" id="{{ movie.id }}">
-    <img class="card-img-top" src="{{ movie.imageUrl }}" />
-    <div class="card-body">
-      <h2 class="card-title">{{ movie.name }}</h2>
-      <h4>{{ movie.year }}</h4>
-      <p class="card-text">{{ movie.description }}</p>
-
-      <h3>
-        {{ movie.price }} SEK
-        <button (click)="buyMovie(movie)">BUY</button>
-      </h3>
+        <h3 class="text-white">
+          {{ movie.price }} SEK
+          <button
+            class="btn btn-outline-light"
+            (click)="buyMovie(movie)"
+            (click)="buySnackBar('Item was added to your cart!🤙', 'Dismiss')"
+          >
+            BUY
+          </button>
+        </h3>
+      </div>
     </div>
   </div>
-</div>
+</section>

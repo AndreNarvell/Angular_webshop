@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IProduct } from 'src/app/interfaces/IProduct';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { HttpFetchService } from 'src/app/services/http-fetch.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,9 +10,16 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class NavbarComponent implements OnInit {
   cartProducts: IProduct[] = [];
 
-  constructor(private LSservice: LocalStorageService) {}
+  itemsInBasket: number = 0;
+
+  constructor(private httpFetch: HttpFetchService) {}
 
   ngOnInit(): void {
-    this.cartProducts = JSON.parse(this.LSservice.getLocalstorage('LScart'));
+    this.httpFetch.amountOfItems$.subscribe((amountOfItemsFromService) => {
+      this.itemsInBasket = amountOfItemsFromService;
+    });
+
+    let itemsInBasketNr: string = localStorage.getItem('itemsInBasket') || '[]';
+    this.itemsInBasket = JSON.parse(itemsInBasketNr);
   }
 }

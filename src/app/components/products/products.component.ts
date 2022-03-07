@@ -44,6 +44,12 @@ export class ProductsComponent implements OnInit {
     this.boughtProducts.push(movie);
     this.LSservice.setLocalstorage('LScart', this.boughtProducts);
 
+    this.httpFetch.updateBasketItemNumber(this.boughtProducts.length);
+    localStorage.setItem(
+      'itemsInBasket',
+      JSON.stringify(this.boughtProducts.length)
+    );
+
     // this.openSnackBar('Nice');
   }
 }

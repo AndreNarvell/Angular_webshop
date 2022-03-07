@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Subject } from 'rxjs';
+import { catchError, map, Subject } from 'rxjs';
 import { IProduct } from '../interfaces/IProduct';
 import { IOrder } from '../models/IOrder';
+// import { IMovieCategory } from '../interfaces/IMovieCategory';
 
 @Injectable({
   providedIn: 'root',
@@ -17,6 +18,12 @@ export class HttpFetchService {
   private adminOrders = new Subject<IOrder[]>();
   adminOrders$ = this.adminOrders.asObservable();
 
+  // private category = new Subject<IMovieCategory[]>();
+  // category$ = this.category.asObservable();
+
+  private amountOfItems = new Subject<number>();
+  amountOfItems$ = this.amountOfItems.asObservable();
+
   constructor(private http: HttpClient) {}
 
   getProducts() {
@@ -28,15 +35,21 @@ export class HttpFetchService {
         this.products.next(data);
       });
   }
-
-  makePurchase(order: IOrder) {
-    this.ordersMade.push(order);
-
-    return this.http.post<IOrder>(
-      'https://medieinstitutet-wie-products.azurewebsites.net/api/orders',
-      order
-    );
-  }
+  // Not working yet
+  // getCategories(category: string) {
+  //   this.http
+  //     .get<IMovieCategory[]>(
+  //       'https://medieinstitutet-wie-products.azurewebsites.net/api/categories'
+  //     )
+  //     .pipe(
+  //       map((response) =>
+  //         response.find((movieCategory) => movieCategory.name === category)
+  //       )
+  //     )
+  //     .subscribe((category: any) => {
+  //       this.category.next(category);
+  //     });
+  // }
 
   getPurchasesToAdmin() {
     this.http
@@ -56,5 +69,9 @@ export class HttpFetchService {
           '?companyId=34'
       )
       .subscribe(() => this.getPurchasesToAdmin());
+  }
+
+  updateBasketItemNumber(amountOfItems: number) {
+    this.amountOfItems.next(amountOfItems);
   }
 }

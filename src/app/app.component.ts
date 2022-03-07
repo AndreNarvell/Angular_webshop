@@ -8,5 +8,4 @@ import { IProduct } from './interfaces/IProduct';
 })
 export class AppComponent {
   title = 'Webshop';
-  cartProducts: IProduct[] = [];
 }

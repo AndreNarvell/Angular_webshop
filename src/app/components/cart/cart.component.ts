@@ -6,6 +6,7 @@ import { IOrder } from 'src/app/models/IOrder';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { OrderService } from 'src/app/services/order.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpFetchService } from 'src/app/services/http-fetch.service';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +22,8 @@ export class CartComponent implements OnInit {
   constructor(
     private LSservice: LocalStorageService,
     private orderService: OrderService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private httpFetch: HttpFetchService
   ) {}
 
   userForm = new FormGroup({
@@ -74,17 +76,26 @@ export class CartComponent implements OnInit {
     this.orderService.createOrder(this.order);
     this.cartProducts = [];
     this.emptyCart();
+    this.httpFetch.updateBasketItemNumber(this.cartProducts.length);
+    this.LSservice.clearLocalstorage('itemsInBasket');
   }
 
   deleteMovie(id: number) {
     this.cartProducts.splice(id, 1);
     this.getAmount();
     this.LSservice.setLocalstorage('LScart', this.cartProducts);
+    this.httpFetch.updateBasketItemNumber(this.cartProducts.length);
+    localStorage.setItem(
+      'itemsInBasket',
+      JSON.stringify(this.cartProducts.length)
+    );
   }
 
   emptyCart() {
     this.LSservice.clearLocalstorage('LScart');
     this.cartProducts = JSON.parse(this.LSservice.getLocalstorage('LScart'));
+    this.httpFetch.updateBasketItemNumber(this.cartProducts.length);
+    this.LSservice.clearLocalstorage('itemsInBasket');
   }
 
   deleteMovieSnackBar(message: string, action: string) {
@@ -94,6 +105,13 @@ export class CartComponent implements OnInit {
     });
   }
   orderCompletedSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['mat-toolbar'],
+    });
+  }
+
+  emptyCartSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
       panelClass: ['mat-toolbar'],

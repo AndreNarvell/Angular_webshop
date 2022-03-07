@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrderRow } from 'src/app/interfaces/IOrderRow';
 import { IProduct } from 'src/app/interfaces/IProduct';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 

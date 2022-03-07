@@ -10,9 +10,6 @@ import { AdminComponent } from './components/admin/admin.component';
 import { CartComponent } from './components/cart/cart.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { MainComponent } from './components/main/main.component';
-import { FooterComponent } from './components/footer/footer.component';
-import { PrintMoviesComponent } from './components/print-movies/print-movies.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,9 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CartComponent,
     NotfoundComponent,
     NavbarComponent,
-    MainComponent,
-    FooterComponent,
-    PrintMoviesComponent,
   ],
   imports: [
     BrowserModule,

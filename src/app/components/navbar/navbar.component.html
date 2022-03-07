@@ -11,7 +11,7 @@
   </div>
 </section> -->
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary py-2">
   <div class="container-fluid">
     <a class="navbar-brand" href="#" routerLink="/">HOME</a>
     <!-- <button
@@ -31,7 +31,9 @@
           <a class="nav-link" href="#" routerLink="/products">Products </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#" routerLink="/cart">Cart</a>
+          <a class="nav-link" href="#" routerLink="/cart"
+            >Cart ({{ cartProducts.length }})</a
+          >
         </li>
       </ul>
     </div>

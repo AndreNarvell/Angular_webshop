@@ -1,16 +1,36 @@
 <div *ngIf="adminOrders.length === 0">
   <section>
-    <h1>No orders to show, sorry admin...</h1>
+    <h1 class="text-white text-center mb-5">
+      No orders to show, sorry admin...🤓
+    </h1>
   </section>
 </div>
 
 <div *ngIf="adminOrders.length >= 1">
-  <section *ngFor="let orders of adminOrders.reverse()" id="{{ orders.id }}">
+  <h1 class="text-white text-center mb-5">Completed orders</h1>
+  <section
+    style="
+      border: 1px solid white;
+      border-radius: 5px;
+      padding: 1rem;
+      display: inline-block;
+      margin-right: 1rem;
+    "
+    class="text-primary bg-white m-3"
+    *ngFor="let orders of adminOrders.reverse()"
+    id="{{ orders.id }}"
+  >
     <p>Order id: {{ orders.id }}</p>
     <p>Order made by: {{ orders.createdBy | titlecase }}</p>
-    <p>Order date: {{ orders.created | date: "dd/MM/yyyy" }}</p>
+    <p>Order date: {{ orders.created | date: "dd/MM/yyyy, h:mm a" }}</p>
     <p>Order total price: {{ orders.totalPrice + "SEK" }}</p>
     <p>Order payment method: {{ orders.paymentMethod }}</p>
-    <button (click)="deleteOrder(orders.id)">Delete order</button>
+    <button
+      class="btn btn-outline-primary p-2 mt-2"
+      style="border-radius: 10px"
+      (click)="deleteOrder(orders.id)"
+    >
+      Delete order
+    </button>
   </section>
 </div>

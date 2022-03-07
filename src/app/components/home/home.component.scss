@@ -1,3 +1,36 @@
 h1 {
   color: #363636;
 }
+
+h3 {
+  margin-top: 5rem;
+  font-size: 3rem;
+}
+
+.textdiv {
+  max-width: 30rem;
+}
+
+button {
+  border-radius: 10px !important;
+  // padding: 0.3rem 1rem 0.3rem 1rem;
+}
+nav {
+  padding: 0 !important;
+}
+
+.imageBgDiv {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  filter: brightness(40%) blur(4px);
+  z-index: -1;
+  background-repeat: no-repeat, repeat;
+  position: absolute;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  background-image: url(./../../../image/homeBG2.png);
+}

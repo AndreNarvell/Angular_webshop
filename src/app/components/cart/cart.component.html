@@ -1,27 +1,63 @@
-<div *ngIf="cartProducts.length === 0">
-  <p>NO ITEMS</p>
-</div>
+<h1 class="text-white text-center mt-4">Your cart</h1>
 
-<div *ngIf="cartProducts.length >= 1">
-  <p *ngFor="let cartMovie of cartProducts; let i = index">
-    {{ cartMovie.name }}
-    <button
-      (click)="buySnackBar('Item was deleted. ', 'Dismiss')"
-      (click)="deleteMovie(i)"
-    >
-      Remove
-    </button>
-  </p>
-
-  <h2>Total money : {{ totalAmount }}</h2>
-
-  <div>
-    <form [formGroup]="userForm" (ngSubmit)="completePurchase()">
-      <p>Customer info</p>
-      <input type="text" placeholder="firstname" formControlName="firstname" />
-
-      <button type="submit" [disabled]="!userForm.valid">Purchase</button>
-    </form>
+<section class="container">
+  <div *ngIf="cartProducts.length === 0">
+    <h5 class="text-white text-center mt-5">NO ITEMS... YET!</h5>
   </div>
-  <button (click)="emptyCart()">Empty cart</button>
-</div>
+
+  <div *ngIf="cartProducts.length >= 1" class="mt-5 ml-3">
+    <p class="text-white">Here are your items:</p>
+    <h5
+      class="text-white"
+      *ngFor="let cartMovie of cartProducts; let i = index"
+    >
+      {{ cartMovie.name }}
+      <button
+        class="btn btn-outline-light ml-3 px-2 py-0"
+        style="border-radius: 10px; border-width: thin"
+        (click)="deleteMovieSnackBar('Item was deleted. ', 'Dismiss')"
+        (click)="deleteMovie(i)"
+      >
+        x
+      </button>
+    </h5>
+
+    <h2 class="text-white mt-5">Total price : {{ totalAmount }}</h2>
+
+    <div class="form-group">
+      <form [formGroup]="userForm" (ngSubmit)="completePurchase()">
+        <p class="text-white">Log in</p>
+        <input
+          style="width: 20vw"
+          class="form-control"
+          type="text"
+          placeholder="Username"
+          formControlName="username"
+        />
+        <input
+          style="width: 20vw"
+          class="form-control mt-1"
+          type="password"
+          placeholder="Password"
+          formControlName="password"
+        />
+
+        <button
+          class="btn btn-outline-light p-2 mt-2"
+          style="border-radius: 10px"
+          type="submit"
+          [disabled]="!userForm.valid"
+        >
+          Purchase
+        </button>
+      </form>
+    </div>
+    <button
+      class="btn btn-outline-light p-2 mt-5"
+      style="border-radius: 10px"
+      (click)="emptyCart()"
+    >
+      Empty cart
+    </button>
+  </div>
+</section>

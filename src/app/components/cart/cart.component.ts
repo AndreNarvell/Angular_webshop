@@ -25,7 +25,8 @@ export class CartComponent implements OnInit {
   ) {}
 
   userForm = new FormGroup({
-    firstname: new FormControl('', [Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required]),
   });
 
   getAmount() {
@@ -62,7 +63,7 @@ export class CartComponent implements OnInit {
     }
     this.order = new IOrder(
       new Date().toISOString().split('.')[0],
-      this.userForm.value.firstname,
+      this.userForm.value.username,
       this.totalAmount,
       this.orderRows
     );
@@ -86,7 +87,13 @@ export class CartComponent implements OnInit {
     this.cartProducts = JSON.parse(this.LSservice.getLocalstorage('LScart'));
   }
 
-  buySnackBar(message: string, action: string) {
+  deleteMovieSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      panelClass: ['mat-toolbar'],
+    });
+  }
+  orderCompletedSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
       panelClass: ['mat-toolbar'],

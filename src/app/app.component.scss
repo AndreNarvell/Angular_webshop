@@ -14,15 +14,18 @@ $mainfont: "Poppins", sans-serif;
   //   font-family: $mainfont;
 }
 
-// footer {
-//   text-align: center;
-//   background-color: #363636;
-//   width: 100%;
-//   height: 3rem;
-//   position: fixed;
-//   bottom: 0;
-//   // margin-bottom: 2rem;
-//   a {
-//     color: #fdfdfd;
-//   }
-// }
+footer {
+  // text-align: center;
+  // background-color: #363636 !important;
+  width: 100%;
+  height: 2rem !important;
+  position: fixed;
+  bottom: 0;
+  padding: 0rem 0rem 0rem 1rem;
+  // margin-bottom: 2rem;
+  a {
+    // font-size: 1.5rem;
+    color: #fdfdfd;
+    text-align: center;
+  }
+}

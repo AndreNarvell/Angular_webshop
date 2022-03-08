@@ -12,14 +12,17 @@ export class LocalStorageService {
     this.localStorage = window.localStorage;
   }
 
+  //Setting localStorage
   setLocalstorage(key: string, value: IProduct[]) {
     this.localStorage.setItem(key, JSON.stringify(value));
   }
 
+  //Getting localStorage
   getLocalstorage(key: string): string {
     return this.localStorage.getItem(key) || '[]';
   }
 
+  //Clearing localStorage
   clearLocalstorage(key: string) {
     this.localStorage.removeItem(key);
   }

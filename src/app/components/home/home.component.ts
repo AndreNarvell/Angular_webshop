@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  //Funny snackbar hehe
   buttonPressSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 4000,

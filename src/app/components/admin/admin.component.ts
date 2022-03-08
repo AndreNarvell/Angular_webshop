@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
     this.getCompletedOrders();
   }
 
+  //Getting completed orders to admin page
   getCompletedOrders() {
     this.httpFetch.adminOrders$.subscribe((data) => {
       this.adminOrders = data;
@@ -23,6 +24,7 @@ export class AdminComponent implements OnInit {
     this.httpFetch.getPurchasesToAdmin();
   }
 
+  //Letting admin delete order
   deleteOrder(id: number) {
     this.httpFetch.adminDeleteOrder(id);
   }

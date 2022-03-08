@@ -10,16 +10,18 @@ import { HttpFetchService } from 'src/app/services/http-fetch.service';
 export class NavbarComponent implements OnInit {
   cartProducts: IProduct[] = [];
 
-  itemsInBasket: number = 0;
+  itemsInCheckout: number = 0;
 
   constructor(private httpFetch: HttpFetchService) {}
 
+  //Checking total amount of items in cart from LS
   ngOnInit(): void {
-    this.httpFetch.amountOfItems$.subscribe((amountOfItemsFromService) => {
-      this.itemsInBasket = amountOfItemsFromService;
+    this.httpFetch.itemsInCart$.subscribe((itemsInCartFromService) => {
+      this.itemsInCheckout = itemsInCartFromService;
     });
 
-    let itemsInBasketNr: string = localStorage.getItem('itemsInBasket') || '[]';
-    this.itemsInBasket = JSON.parse(itemsInBasketNr);
+    let itemsInCheckoutNr: string =
+      localStorage.getItem('itemsInBasket') || '[]';
+    this.itemsInCheckout = JSON.parse(itemsInCheckoutNr);
   }
 }

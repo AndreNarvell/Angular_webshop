@@ -31,6 +31,7 @@ export class CartComponent implements OnInit {
     password: new FormControl('', [Validators.required]),
   });
 
+  //Getting the total price
   getAmount() {
     this.totalAmount = this.cartProducts.reduce(
       (acc, curr) => acc + curr.price,
@@ -43,7 +44,10 @@ export class CartComponent implements OnInit {
     this.getAmount();
   }
 
+  //Function for completing purchase
   completePurchase() {
+    //Loop to check if there are more of the same id, if there is,
+    //push them in the same orderRow and then add 1 to amount, otherwise add a new orderRow
     for (let i = 0; i < this.cartProducts.length; i++) {
       if (
         !this.orderRows.some(
@@ -80,6 +84,7 @@ export class CartComponent implements OnInit {
     this.LSservice.clearLocalstorage('itemsInBasket');
   }
 
+  //Delete movie from cart, updating LS
   deleteMovie(id: number) {
     this.cartProducts.splice(id, 1);
     this.getAmount();
@@ -91,19 +96,23 @@ export class CartComponent implements OnInit {
     );
   }
 
+  //Empty cart, deleting LS
   emptyCart() {
     this.LSservice.clearLocalstorage('LScart');
     this.cartProducts = JSON.parse(this.LSservice.getLocalstorage('LScart'));
+
     this.httpFetch.updateBasketItemNumber(this.cartProducts.length);
     this.LSservice.clearLocalstorage('itemsInBasket');
   }
 
+  //Snackbar when deleting movie
   deleteMovieSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
       panelClass: ['mat-toolbar'],
     });
   }
+  //Snackbar when completing a purchase
   orderCompletedSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
@@ -111,6 +120,7 @@ export class CartComponent implements OnInit {
     });
   }
 
+  //Snackbar when emptying cart
   emptyCartSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,

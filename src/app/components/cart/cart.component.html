@@ -2,7 +2,9 @@
 
 <section class="container">
   <div *ngIf="cartProducts.length === 0">
-    <h5 class="text-white text-center mt-5">NO ITEMS... YET!</h5>
+    <h5 class="text-white text-center mt-5" style="font-weight: 200">
+      NO ITEMS... YET!
+    </h5>
   </div>
 
   <div *ngIf="cartProducts.length >= 1" class="mt-5 ml-3">

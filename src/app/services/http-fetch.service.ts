@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { catchError, map, Subject } from 'rxjs';
 import { IProduct } from '../interfaces/IProduct';
 import { IOrder } from '../models/IOrder';
@@ -13,19 +12,19 @@ export class HttpFetchService {
   private products = new Subject<IProduct[]>();
   products$ = this.products.asObservable();
 
-  private ordersMade: IOrder[] = [];
-
   private adminOrders = new Subject<IOrder[]>();
   adminOrders$ = this.adminOrders.asObservable();
 
+  // Not working yet
   // private category = new Subject<IMovieCategory[]>();
   // category$ = this.category.asObservable();
 
-  private amountOfItems = new Subject<number>();
-  amountOfItems$ = this.amountOfItems.asObservable();
+  private itemsInCart = new Subject<number>();
+  itemsInCart$ = this.itemsInCart.asObservable();
 
   constructor(private http: HttpClient) {}
 
+  //Fetching products from api
   getProducts() {
     this.http
       .get<IProduct[]>(
@@ -35,6 +34,7 @@ export class HttpFetchService {
         this.products.next(data);
       });
   }
+
   // Not working yet
   // getCategories(category: string) {
   //   this.http
@@ -51,6 +51,7 @@ export class HttpFetchService {
   //     });
   // }
 
+  //Fetching orders to admin page
   getPurchasesToAdmin() {
     this.http
       .get<IOrder[]>(
@@ -61,6 +62,7 @@ export class HttpFetchService {
       });
   }
 
+  //Deleting orders in admin
   adminDeleteOrder(id: number) {
     this.http
       .delete(
@@ -71,7 +73,8 @@ export class HttpFetchService {
       .subscribe(() => this.getPurchasesToAdmin());
   }
 
-  updateBasketItemNumber(amountOfItems: number) {
-    this.amountOfItems.next(amountOfItems);
+  //Tracking amount of items in cart
+  updateBasketItemNumber(itemsInCart: number) {
+    this.itemsInCart.next(itemsInCart);
   }
 }

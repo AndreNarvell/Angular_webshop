@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
     this.boughtProducts = JSON.parse(this.LSservice.getLocalstorage('LScart'));
   }
 
+  //Fetching all products from API
   getApiProducts() {
     this.httpFetch.products$.subscribe((data) => {
       this.products = data;
@@ -33,6 +34,7 @@ export class ProductsComponent implements OnInit {
     this.httpFetch.getProducts();
   }
 
+  //Snackbar when adding movie to cart
   buySnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
@@ -40,6 +42,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
+  //Adding movie to cart
   buyMovie(movie: any) {
     this.boughtProducts.push(movie);
     this.LSservice.setLocalstorage('LScart', this.boughtProducts);
@@ -49,7 +52,5 @@ export class ProductsComponent implements OnInit {
       'itemsInBasket',
       JSON.stringify(this.boughtProducts.length)
     );
-
-    // this.openSnackBar('Nice');
   }
 }
